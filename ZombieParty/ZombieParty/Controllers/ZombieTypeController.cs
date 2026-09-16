@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ZombieParty.Models;
 using ZombieParty.Models.Data;
 using ZombieParty.ViewModels;
@@ -60,5 +61,54 @@ namespace ZombieParty.Controllers
             return this.View(zombieType);
         }
 
+        public IActionResult Edit(int id)
+        {
+            ZombieType? zombieType = _baseDonnees.ZombieTypes.Find(id);
+
+            return View(zombieType);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            ZombieType? zombieType = _baseDonnees.ZombieTypes.Find(id);
+
+            return View(zombieType);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePost(int id)
+        {
+            ZombieType? zombieType = _baseDonnees.ZombieTypes.Find(id);
+            if (zombieType == null)
+            {
+                return NotFound();
+            }
+
+            _baseDonnees.ZombieTypes.Remove(zombieType);
+            _baseDonnees.SaveChanges();
+            TempData["Success"] = $"Zombie {zombieType.TypeName} terminated";
+            return RedirectToAction("Index");
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(ZombieType zombieType)
+        {
+            if (ModelState.IsValid)
+            {
+                _baseDonnees.ZombieTypes.Update(zombieType);
+                _baseDonnees.SaveChanges();
+
+                TempData["Success"] = $"Zombie type {zombieType.TypeName} has been modified";
+                return RedirectToAction("Index");
+            }
+
+
+            return View(zombieType);
+
+        }
     }
 }
