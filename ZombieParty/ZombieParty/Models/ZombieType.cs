@@ -17,5 +17,9 @@ namespace ZombieParty.Models
         public int Point { get; set; }
         [ValidateNever]
         public List<Zombie>? Zombies { get; set; }
+
+
+
+
     }
 }
