@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZombieParty.Models.Data;
 
@@ -11,9 +12,11 @@ using ZombieParty.Models.Data;
 namespace ZombieParty.Migrations
 {
     [DbContext(typeof(ZombiePartyDbContext))]
-    partial class ZombiePartyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260916135517_SeedZombieZombieTypeWeapon")]
+    partial class SeedZombieZombieTypeWeapon
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,18 +125,6 @@ namespace ZombieParty.Migrations
                             Name = "Master Shield",
                             Price = 500m,
                             Qty = 30,
-                            QtyBought = 1
-                        },
-                        new
-                        {
-                            WeaponId = 3,
-                            CreatedDate = new DateTime(2001, 10, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Michael Jackson's Hehe",
-                            Force = 1000m,
-                            Image = "https://i.pinimg.com/736x/ac/3f/4a/ac3f4a2058c70a1a7da78a373819639d.jpg",
-                            Name = "Hehe",
-                            Price = 1200m,
-                            Qty = 3,
                             QtyBought = 1
                         });
                 });
